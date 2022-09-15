@@ -1,6 +1,7 @@
 <template>
   <div class="auth_wrap">
-    <form class="login-form">
+    <form class="login-form" @submit.prevent="submit">
+      {{loginForm}}
       <my-input
           v-model="loginForm.login"
           type="text"
@@ -11,11 +12,10 @@
           type="password"
           placeholder="Password"
       />
-      <my-button
-          @click="login"
-      >
-        Login
-      </my-button>
+      <div class="buttons">
+        <my-button type="submit">Login</my-button>
+        <my-link @click="$router.push('/register')">Register</my-link>
+      </div>
     </form>
   </div>
 </template>
@@ -23,9 +23,12 @@
 <script>
 import MyInput from "@/components/ui/MyInput";
 import MyButton from "@/components/ui/MyButton";
+import MyLink from "@/components/ui/MyLink";
+import { mapActions } from 'vuex'
+
 export default {
   name: "Login",
-  components: {MyButton, MyInput},
+  components: {MyLink, MyButton, MyInput},
 
   data() {
     return {
@@ -36,8 +39,12 @@ export default {
     }
   },
   methods: {
-    login() {
-      alert("login")
+    ...mapActions({
+      login: 'auth/login'
+    }),
+
+    submit() {
+      this.login(this.loginForm)
     }
   }
 }
