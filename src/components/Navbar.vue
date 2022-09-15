@@ -2,7 +2,7 @@
   <div class="navbar">
     <div class="logo" @click="$router.push('/')">ArticleBlog</div>
     <div class="navbar_btns">
-      <my-button class="btn" @click="$router.push('/login')">Login</my-button>
+      <my-button class="btn" @click="$router.push('/login')">Authorization</my-button>
     </div>
   </div>
 </template>
