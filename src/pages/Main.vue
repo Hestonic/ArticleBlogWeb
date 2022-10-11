@@ -23,7 +23,6 @@ export default {
       try {
         const response = await axios.get("http://localhost:8080/api/articles");
         this.posts = response.data.articlesList;
-        console.log(response);
       } catch (e) {
         alert("ошибка");
         console.log(e);
