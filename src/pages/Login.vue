@@ -1,7 +1,6 @@
 <template>
   <div class="auth_wrap">
     <form class="login-form" @submit.prevent="submit">
-      {{loginForm}}
       <my-input
           v-model="loginForm.login"
           type="text"
@@ -44,7 +43,11 @@ export default {
     }),
 
     submit() {
-      this.login(this.loginForm)
+      this.login(this.loginForm).then(() => {
+        this.$router.replace("/")
+      }).catch(() => {
+        alert("Ошибка входа")
+      })
     }
   }
 }
