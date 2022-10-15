@@ -25,7 +25,6 @@ export default {
         const response = await axios.get(`http://localhost:8080/api/articles/${this.$route.params.id}`);
         this.post = response.data;
         this.articleInfo = response.data.articleInfo
-        console.log(response);
       } catch (e) {
         alert("ошибка");
         console.log(e);
