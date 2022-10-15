@@ -1,7 +1,15 @@
 <template>
   <div class="navbar">
-    <div class="logo" @click="$router.push('/')">ArticleBlog</div>
-    <div class="navbar_btns">
+    <div class="logo-wrap">
+      <div class="logo" @click="$router.push('/')">ArticleBlog</div>
+      <my-button class="write-article-btn" @click="$router.push('/write-article')" v-if="authenticated">Write article</my-button>
+      <my-button class="my-articles-btn" @click="$router.push('/my-articles')" v-if="authenticated">My Articles</my-button>
+    </div>
+    <div v-if="authenticated" class="profile">
+      <div class="profile-name">Hi, {{ user }}</div>
+      <my-button class="exit-btn" @click.prevent="logOut">Log Out</my-button>
+    </div>
+    <div class="navbar_btns" v-else>
       <my-button class="btn" @click="$router.push('/login')">Authorization</my-button>
     </div>
   </div>
