@@ -25,13 +25,13 @@
 <script>
 import MyIco from "@/components/ui/MyIco";
 import MyLink from "@/components/ui/MyLink";
+import MyButton from "@/components/ui/MyButton";
 
 export default {
-  components: {MyLink, MyIco},
+  components: {MyButton, MyLink, MyIco},
   name: "post-list",
   props: {
     posts: Array,
-    // required: true,
   }
 }
 </script>

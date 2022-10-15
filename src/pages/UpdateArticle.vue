@@ -74,8 +74,6 @@ export default {
 
     removeCategory(category) {
       this.selectedCategories = toRaw(this.selectedCategories).filter(p => p.id !== toRaw(category).id)
-      console.log(toRaw(category))
-      console.log(toRaw(this.selectedCategories))
     },
 
     async fetchPost() {
@@ -100,8 +98,6 @@ export default {
     selectedCategory(newValue) {
       let obj = toRaw(this.categoriesOptions).find(o => o.id === Number(newValue));
       this.selectedCategories.push(obj)
-      console.log(obj)
-      console.log(toRaw(this.selectedCategories))
     }
   }
 }
