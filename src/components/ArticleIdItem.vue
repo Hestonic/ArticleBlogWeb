@@ -2,7 +2,6 @@
   <div class="post">
     <div class="post-top">
       <div class="author">Author: {{ post.author }}</div>
-
       <div class="widgets">
 
         <div class="widget views">
@@ -19,6 +18,11 @@
 
     </div>
 
+    <div>
+      <my-button class="edit-btn" v-if="post.author === user" @click="$router.push(`/update-article/${this.$route.params.id}`)">Edit post</my-button>
+      <my-button v-if="post.author === user" @click="deletePost">Delete post</my-button>
+    </div>
+
     <div class="title"> {{ post.title }}</div>
     <div class="categories">
       <div class="category" v-for="categoryModel in post.categories"> {{ categoryModel.category }}</div>
@@ -29,14 +33,34 @@
 
 <script>
 import MyIco from "@/components/ui/MyIco";
+import {mapGetters} from "vuex";
+import MyButton from "@/components/ui/MyButton";
+import axios from "axios";
 
 export default {
-  components: {MyIco},
+  components: {MyButton, MyIco},
   name: "article-id-item",
+  computed: {
+    ...mapGetters({
+      user: 'auth/user',
+    })
+  },
   props: {
     post: Object,
     articleInfo: Object
-  }
+  },
+  methods: {
+    async deletePost() {
+      try {
+        await axios.delete(`http://localhost:8080/api/article/delete/${this.$route.params.id}`);
+        alert("Article has been deleted")
+        await this.$router.push("/")
+      } catch (e) {
+        alert("ошибка");
+        console.log(e);
+      }
+    },
+  },
 }
 </script>
 
@@ -101,5 +125,9 @@ export default {
 .content {
   padding: 10px;
   font-size: x-large;
+}
+
+.edit-btn {
+  margin-right: 20px;
 }
 </style>
